@@ -6,8 +6,8 @@ Kubernetes cluster diagnostics for AI assistants. Two implementations, one goal:
 
 | Project | Path | Approach | Tools |
 |---------|------|----------|-------|
-| **Go MCP Server** | root (`main.go`) | Standalone binary, stdio transport (MCP protocol) | 27 |
-| **VS Code Extension** | `kube-doctor-vscode/` | Native Language Model Tools API (no MCP dependency) | 11 |
+| **Go MCP Server** | root (`main.go`) | Standalone binary, stdio transport (MCP protocol) | 40 |
+| **VS Code Extension** | `kube-doctor-vscode/` | Native Language Model Tools API (no MCP dependency) | 15 |
 
 Both connect directly to the Kubernetes API via your kubeconfig. No kubectl dependency.
 
@@ -79,7 +79,7 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 }
 ```
 
-### All 27 Tools
+### All 40 Tools
 
 | Category | Tool | Description |
 |----------|------|-------------|
@@ -105,6 +105,19 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 | **Metrics** | `get_node_metrics` | Node CPU/memory usage |
 | | `get_pod_metrics` | Pod CPU/memory usage |
 | | `top_resource_consumers` | Top N pods by CPU or memory |
+| **Policy** | `list_network_policies` | Network policies with selectors and rules |
+| | `analyze_pod_connectivity` | Pod traffic analysis with Mermaid diagram |
+| | `list_hpas` | Horizontal Pod Autoscalers |
+| | `list_pdbs` | Pod Disruption Budgets |
+| **Security** | `analyze_pod_security` | Pod/container SecurityContext audit |
+| | `list_rbac_bindings` | Role bindings with subject filter |
+| | `audit_namespace_security` | Composite security score with Mermaid |
+| **Resources** | `analyze_resource_allocation` | CPU/memory requests vs limits vs capacity with Mermaid |
+| | `list_limit_ranges` | LimitRange rules |
+| | `get_workload_dependencies` | ConfigMap/Secret/PVC/Service dependency map with Mermaid |
+| **Discovery** | `list_crds` | Custom Resource Definitions |
+| | `get_api_resources` | Available API resource types |
+| | `list_webhook_configs` | Mutating/validating webhooks with failure policies |
 | **Doctor** | `diagnose_pod` | Comprehensive pod diagnosis |
 | | `diagnose_namespace` | Namespace health check |
 | | `diagnose_cluster` | Cluster-wide health report |
@@ -172,6 +185,10 @@ You can reference tools directly in Copilot Chat with `#`:
 | `#kubeDiagnoseNamespace` | Diagnose a namespace |
 | `#kubeDiagnoseCluster` | Cluster-wide health check |
 | `#kubeFindUnhealthyPods` | Find unhealthy pods |
+| `#kubeListNetworkPolicies` | List network policies |
+| `#kubeAnalyzePodConnectivity` | Analyze pod network connectivity (Mermaid) |
+| `#kubeAnalyzePodSecurity` | Analyze pod security posture |
+| `#kubeGetWorkloadDependencies` | Map workload dependencies (Mermaid) |
 
 ### Why a VS Code Extension?
 
@@ -246,12 +263,13 @@ kube-doctor-mcp/
 ├── CLAUDE.md                              ← AI assistant instructions
 ├── main.go                                ← Server entry point
 ├── go.mod
+├── .github/agents/kube-doctor.agent.md    ← GitHub Copilot agent
 ├── pkg/
 │   ├── k8s/                               ← Kubernetes client wrappers
-│   ├── tools/                             ← MCP tool handlers
+│   ├── tools/                             ← MCP tool handlers (13 files)
 │   └── util/                              ← Formatting, filters, error helpers
 ├── .vscode/mcp.json                       ← VS Code MCP config
-└── kube-doctor-vscode/                    ← VS Code extension
+└── kube-doctor-vscode/                    ← VS Code extension (15 tools)
     ├── package.json
     ├── src/
     │   ├── extension.ts

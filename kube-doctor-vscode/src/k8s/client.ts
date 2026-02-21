@@ -26,6 +26,14 @@ export function getCurrentContext(): string {
     return getKubeConfig().getCurrentContext();
 }
 
+export function getRbacApi(): k8s.RbacAuthorizationV1Api {
+    return getKubeConfig().makeApiClient(k8s.RbacAuthorizationV1Api);
+}
+
+export function getPolicyApi(): k8s.PolicyV1Api {
+    return getKubeConfig().makeApiClient(k8s.PolicyV1Api);
+}
+
 /** Reset cached config (e.g. if user switches context). */
 export function resetClient(): void {
     _kubeConfig = undefined;

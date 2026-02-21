@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -13,10 +14,11 @@ import (
 
 // ClusterClient wraps Kubernetes client interfaces for cluster access.
 type ClusterClient struct {
-	Clientset     kubernetes.Interface
-	MetricsClient metricsv.Interface
-	Config        *rest.Config
-	ContextName   string
+	Clientset           kubernetes.Interface
+	MetricsClient       metricsv.Interface
+	ApiextensionsClient apiextensionsclient.Interface
+	Config              *rest.Config
+	ContextName         string
 }
 
 // NewClusterClient creates a client from kubeconfig or in-cluster config.
@@ -49,11 +51,15 @@ func NewClusterClient(contextName string) (*ClusterClient, error) {
 	// Metrics API may not be available; don't fail hard
 	metricsClient, _ := metricsv.NewForConfig(config)
 
+	// API extensions client for CRDs; may not be available
+	apiextClient, _ := apiextensionsclient.NewForConfig(config)
+
 	return &ClusterClient{
-		Clientset:     clientset,
-		MetricsClient: metricsClient,
-		Config:        config,
-		ContextName:   contextName,
+		Clientset:           clientset,
+		MetricsClient:       metricsClient,
+		ApiextensionsClient: apiextClient,
+		Config:              config,
+		ContextName:         contextName,
 	}, nil
 }
 
@@ -63,6 +69,16 @@ func NewClusterClientForTesting(clientset kubernetes.Interface, metricsClient me
 		Clientset:     clientset,
 		MetricsClient: metricsClient,
 		ContextName:   "test-context",
+	}
+}
+
+// NewClusterClientForTestingWithApiext creates a ClusterClient with injected fakes including apiextensions for unit tests.
+func NewClusterClientForTestingWithApiext(clientset kubernetes.Interface, metricsClient metricsv.Interface, apiextClient apiextensionsclient.Interface) *ClusterClient {
+	return &ClusterClient{
+		Clientset:           clientset,
+		MetricsClient:       metricsClient,
+		ApiextensionsClient: apiextClient,
+		ContextName:         "test-context",
 	}
 }
 

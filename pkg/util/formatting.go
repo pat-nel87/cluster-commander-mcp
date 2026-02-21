@@ -143,3 +143,8 @@ func FormatResourceQuantity(q string) string {
 	}
 	return q
 }
+
+// FormatMermaidBlock wraps Mermaid diagram code in a fenced code block.
+func FormatMermaidBlock(code string) string {
+	return "```mermaid\n" + code + "\n```"
+}

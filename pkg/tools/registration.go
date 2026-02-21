@@ -16,4 +16,8 @@ func RegisterAll(server *mcp.Server, client *k8s.ClusterClient) {
 	registerStorageTools(server, client)
 	registerMetricsTools(server, client)
 	registerDiagnosticTools(server, client)
+	registerPolicyTools(server, client)
+	registerSecurityTools(server, client)
+	registerResourceTools(server, client)
+	registerDiscoveryTools(server, client)
 }

@@ -26,4 +26,10 @@ const (
 
 	// ResourceUsageWarningPercent is the threshold for resource usage warnings.
 	ResourceUsageWarningPercent = 80
+
+	// MaxNetworkPolicies is the maximum number of network policies to return.
+	MaxNetworkPolicies = 100
+
+	// MaxRBACBindings is the maximum number of RBAC bindings to return.
+	MaxRBACBindings = 200
 )

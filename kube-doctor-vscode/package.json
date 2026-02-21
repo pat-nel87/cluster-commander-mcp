@@ -247,6 +247,102 @@
             }
           }
         }
+      },
+      {
+        "name": "kube-doctor_listNetworkPolicies",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListNetworkPolicies",
+        "displayName": "List Kubernetes Network Policies",
+        "modelDescription": "List network policies with pod selectors, ingress/egress rule counts, and policy details. Use when investigating network segmentation, traffic restrictions, or pod connectivity issues.",
+        "userDescription": "List network policies in a Kubernetes namespace.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(shield)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace. Empty string for all namespaces."
+            }
+          },
+          "required": ["namespace"]
+        }
+      },
+      {
+        "name": "kube-doctor_analyzePodConnectivity",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeAnalyzePodConnectivity",
+        "displayName": "Analyze Pod Network Connectivity",
+        "modelDescription": "Analyze network connectivity for a specific pod by matching its labels against all network policies. Produces a Mermaid flowchart showing allowed and denied traffic. Use when debugging why a pod cannot reach another service or is unreachable.",
+        "userDescription": "Analyze network connectivity for a Kubernetes pod with Mermaid diagram.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(plug)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            },
+            "podName": {
+              "type": "string",
+              "description": "Pod name to analyze"
+            }
+          },
+          "required": ["namespace", "podName"]
+        }
+      },
+      {
+        "name": "kube-doctor_analyzePodSecurity",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeAnalyzePodSecurity",
+        "displayName": "Analyze Pod Security Posture",
+        "modelDescription": "Analyze security posture of a pod. Checks SecurityContext at pod and container level: root user, privilege escalation, capabilities, readOnlyRootFilesystem, hostNetwork/PID/IPC, seccomp profile. Returns severity-tagged findings and suggested hardening actions.",
+        "userDescription": "Analyze the security configuration of a Kubernetes pod.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(lock)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            },
+            "podName": {
+              "type": "string",
+              "description": "Pod name to analyze"
+            }
+          },
+          "required": ["namespace", "podName"]
+        }
+      },
+      {
+        "name": "kube-doctor_getWorkloadDependencies",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeGetWorkloadDependencies",
+        "displayName": "Get Workload Dependencies",
+        "modelDescription": "Map all dependencies for a Deployment, StatefulSet, or Pod: ConfigMaps, Secrets, PVCs, ServiceAccounts from volumes and env. Finds matching Services. Returns a Mermaid dependency graph. Use when understanding what a workload depends on or investigating missing configuration.",
+        "userDescription": "Map all dependencies for a Kubernetes workload with Mermaid graph.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(type-hierarchy)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            },
+            "workloadName": {
+              "type": "string",
+              "description": "Name of the workload"
+            },
+            "workloadKind": {
+              "type": "string",
+              "description": "Deployment, StatefulSet, or Pod (default: Deployment)"
+            }
+          },
+          "required": ["namespace", "workloadName"]
+        }
       }
     ]
   },
