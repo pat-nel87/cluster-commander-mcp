@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "kube-doctor": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/kube-doctor",
+      "env": {
+        "KUBECONFIG": "${env:HOME}/.kube/config"
+      }
+    }
+  }
+}
