@@ -1,0 +1,269 @@
+{
+  "name": "kube-doctor",
+  "displayName": "Kube Doctor",
+  "description": "Kubernetes cluster diagnostics tools for GitHub Copilot — bypasses MCP policy restrictions",
+  "version": "0.1.0",
+  "publisher": "patnel87",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": ["AI", "Other"],
+  "keywords": ["kubernetes", "k8s", "diagnostics", "copilot", "devops"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "extensionDependencies": [
+    "github.copilot-chat"
+  ],
+  "contributes": {
+    "languageModelTools": [
+      {
+        "name": "kube-doctor_listNamespaces",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListNamespaces",
+        "displayName": "List Kubernetes Namespaces",
+        "modelDescription": "List all Kubernetes namespaces in the current cluster with their status and age. Use this when the user asks about namespaces, wants to know what's in the cluster, or needs to pick a namespace to investigate.",
+        "userDescription": "List all namespaces in the Kubernetes cluster.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(server-environment)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "kube-doctor_listPods",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListPods",
+        "displayName": "List Kubernetes Pods",
+        "modelDescription": "List pods in a Kubernetes namespace with their status, restarts, age, and node placement. Use when the user asks about pods, wants to see what's running, or needs to find a specific pod. Set namespace to empty string for all namespaces.",
+        "userDescription": "List pods in a Kubernetes namespace with status details.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(server-process)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace. Empty string for all namespaces."
+            },
+            "labelSelector": {
+              "type": "string",
+              "description": "Optional label selector (e.g. app=nginx)"
+            }
+          },
+          "required": ["namespace"]
+        }
+      },
+      {
+        "name": "kube-doctor_getPodLogs",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeGetPodLogs",
+        "displayName": "Get Kubernetes Pod Logs",
+        "modelDescription": "Get logs from a Kubernetes pod container. Supports tail lines, previous container logs (for crash loops), and container selection for multi-container pods. Use when investigating application errors, crashes, or debugging pod behavior.",
+        "userDescription": "Retrieve logs from a Kubernetes pod.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(output)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            },
+            "name": {
+              "type": "string",
+              "description": "Pod name"
+            },
+            "container": {
+              "type": "string",
+              "description": "Container name (required for multi-container pods)"
+            },
+            "tailLines": {
+              "type": "number",
+              "description": "Number of lines from end (default 100)"
+            },
+            "previous": {
+              "type": "boolean",
+              "description": "Get logs from previously terminated container"
+            }
+          },
+          "required": ["namespace", "name"]
+        }
+      },
+      {
+        "name": "kube-doctor_getEvents",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeGetEvents",
+        "displayName": "Get Kubernetes Events",
+        "modelDescription": "Get Kubernetes events optionally filtered by namespace, involved object name, or event type (Normal/Warning). Use when investigating issues, checking for warnings, or understanding what happened to a resource.",
+        "userDescription": "Get Kubernetes cluster events with optional filters.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(bell)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Namespace (empty for all)"
+            },
+            "eventType": {
+              "type": "string",
+              "description": "Normal or Warning"
+            },
+            "involvedObject": {
+              "type": "string",
+              "description": "Filter by object name"
+            }
+          }
+        }
+      },
+      {
+        "name": "kube-doctor_listDeployments",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListDeployments",
+        "displayName": "List Kubernetes Deployments",
+        "modelDescription": "List deployments in a namespace showing desired/ready/available replicas and conditions. Use when the user asks about deployments, rollout status, or workload health.",
+        "userDescription": "List Kubernetes deployments with replica status.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(layers)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace. Empty string for all namespaces."
+            }
+          },
+          "required": ["namespace"]
+        }
+      },
+      {
+        "name": "kube-doctor_listNodes",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListNodes",
+        "displayName": "List Kubernetes Nodes",
+        "modelDescription": "List all nodes with status, roles, version, CPU/memory capacity, and conditions like MemoryPressure or DiskPressure. Use when checking cluster capacity or node health.",
+        "userDescription": "List Kubernetes cluster nodes with health status.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(server)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "kube-doctor_listServices",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeListServices",
+        "displayName": "List Kubernetes Services",
+        "modelDescription": "List services in a namespace with type, cluster IP, ports, and selectors. Use when investigating networking, service discovery, or connectivity issues.",
+        "userDescription": "List Kubernetes services in a namespace.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(globe)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace. Empty string for all namespaces."
+            }
+          },
+          "required": ["namespace"]
+        }
+      },
+      {
+        "name": "kube-doctor_diagnosePod",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeDiagnosePod",
+        "displayName": "Diagnose Kubernetes Pod",
+        "modelDescription": "Run comprehensive diagnostics on a specific pod. Checks container states, events, restart reasons, resource limits, node conditions, and fetches logs from failing containers. Use this as the PRIMARY tool when investigating a specific pod problem — it combines multiple checks into one call.",
+        "userDescription": "Run full diagnostics on a Kubernetes pod.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(stethoscope)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            },
+            "name": {
+              "type": "string",
+              "description": "Pod name"
+            }
+          },
+          "required": ["namespace", "name"]
+        }
+      },
+      {
+        "name": "kube-doctor_diagnoseNamespace",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeDiagnoseNamespace",
+        "displayName": "Diagnose Kubernetes Namespace",
+        "modelDescription": "Health check an entire namespace. Finds unhealthy pods, failing deployments, pending PVCs, warning events, high restart counts, and resource pressure. Use this as the PRIMARY tool when the user asks about the health of a namespace or wants a broad status check.",
+        "userDescription": "Run health diagnostics on a Kubernetes namespace.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(stethoscope)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Kubernetes namespace"
+            }
+          },
+          "required": ["namespace"]
+        }
+      },
+      {
+        "name": "kube-doctor_diagnoseCluster",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeDiagnoseCluster",
+        "displayName": "Diagnose Kubernetes Cluster",
+        "modelDescription": "Cluster-wide health check. Checks all node conditions, pod phase summary across all namespaces, warning events, kube-system health, and overall resource utilization. Use this when the user asks about cluster health, overall status, or wants a high-level view of problems.",
+        "userDescription": "Run cluster-wide health diagnostics.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(stethoscope)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "kube-doctor_findUnhealthyPods",
+        "tags": ["kubernetes", "kube-doctor"],
+        "toolReferenceName": "kubeFindUnhealthyPods",
+        "displayName": "Find Unhealthy Kubernetes Pods",
+        "modelDescription": "Find all pods that are not healthy — CrashLoopBackOff, ImagePullBackOff, Pending, Error, OOMKilled, etc. Can filter by namespace or search cluster-wide. Use when the user asks about problems, errors, or wants to find what's broken.",
+        "userDescription": "Find all unhealthy pods in the cluster or namespace.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(warning)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string",
+              "description": "Namespace (empty for all namespaces)"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "lint": "eslint src",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.99.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^1.0.0"
+  }
+}
