@@ -2,13 +2,24 @@
   "name": "kube-doctor",
   "displayName": "Kube Doctor",
   "description": "Kubernetes cluster diagnostics tools for GitHub Copilot — bypasses MCP policy restrictions",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "publisher": "patnel87",
   "engines": {
     "vscode": "^1.99.0"
   },
-  "categories": ["AI", "Other"],
-  "keywords": ["kubernetes", "k8s", "diagnostics", "copilot", "devops", "fluxcd", "gitops"],
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "kubernetes",
+    "k8s",
+    "diagnostics",
+    "copilot",
+    "devops",
+    "fluxcd",
+    "gitops"
+  ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "extensionDependencies": [
@@ -18,7 +29,10 @@
     "languageModelTools": [
       {
         "name": "kube-doctor_listNamespaces",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListNamespaces",
         "displayName": "List Kubernetes Namespaces",
         "modelDescription": "List all Kubernetes namespaces in the current cluster with their status and age. Use this when the user asks about namespaces, wants to know what's in the cluster, or needs to pick a namespace to investigate.",
@@ -32,7 +46,10 @@
       },
       {
         "name": "kube-doctor_listNodes",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListNodes",
         "displayName": "List Kubernetes Nodes",
         "modelDescription": "List all nodes with status, roles, version, CPU/memory capacity, and conditions like MemoryPressure or DiskPressure. Use when checking cluster capacity or node health.",
@@ -46,7 +63,10 @@
       },
       {
         "name": "kube-doctor_listContexts",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListContexts",
         "displayName": "List Kubernetes Contexts",
         "modelDescription": "List all kubeconfig contexts showing which clusters are configured and which is currently active. Use when the user wants to see available clusters or check which cluster they are connected to.",
@@ -60,7 +80,10 @@
       },
       {
         "name": "kube-doctor_clusterInfo",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeClusterInfo",
         "displayName": "Get Cluster Info",
         "modelDescription": "Get a high-level summary of the current Kubernetes cluster: context name, server URL, node count, namespace count, and pod/service counts across the cluster. Use when the user asks 'what cluster am I on' or wants an overview.",
@@ -74,7 +97,10 @@
       },
       {
         "name": "kube-doctor_getNodeDetail",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetNodeDetail",
         "displayName": "Get Node Detail",
         "modelDescription": "Get detailed information about a specific Kubernetes node including conditions, capacity, allocatable resources, labels, taints, system info, and pods running on it. Use when investigating a specific node's health or configuration.",
@@ -89,12 +115,17 @@
               "description": "Node name"
             }
           },
-          "required": ["name"]
+          "required": [
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_listPods",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListPods",
         "displayName": "List Kubernetes Pods",
         "modelDescription": "List pods in a Kubernetes namespace with their status, restarts, age, and node placement. Use when the user asks about pods, wants to see what's running, or needs to find a specific pod. Set namespace to empty string for all namespaces.",
@@ -113,12 +144,17 @@
               "description": "Optional label selector (e.g. app=nginx)"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_getPodLogs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetPodLogs",
         "displayName": "Get Kubernetes Pod Logs",
         "modelDescription": "Get logs from a Kubernetes pod container. Supports tail lines, previous container logs (for crash loops), and container selection for multi-container pods. Use when investigating application errors, crashes, or debugging pod behavior.",
@@ -149,12 +185,18 @@
               "description": "Get logs from previously terminated container"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_getPodDetail",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetPodDetail",
         "displayName": "Get Pod Detail",
         "modelDescription": "Get comprehensive detail about a specific pod: phase, conditions, container statuses (ready/state/restart count), resource requests/limits, volumes, labels, annotations, and recent events. Use when you need full detail about a specific pod without running a diagnosis.",
@@ -173,12 +215,18 @@
               "description": "Pod name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_getEvents",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetEvents",
         "displayName": "Get Kubernetes Events",
         "modelDescription": "Get Kubernetes events optionally filtered by namespace, involved object name, or event type (Normal/Warning). Use when investigating issues, checking for warnings, or understanding what happened to a resource.",
@@ -205,7 +253,10 @@
       },
       {
         "name": "kube-doctor_listDeployments",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListDeployments",
         "displayName": "List Kubernetes Deployments",
         "modelDescription": "List deployments in a namespace showing desired/ready/available replicas and conditions. Use when the user asks about deployments, rollout status, or workload health.",
@@ -220,12 +271,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_getDeploymentDetail",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetDeploymentDetail",
         "displayName": "Get Deployment Detail",
         "modelDescription": "Get detailed information about a specific deployment: strategy, replicas, conditions, labels, annotations, container specs, and associated ReplicaSets. Use when investigating a specific deployment's configuration or rollout status.",
@@ -244,12 +300,18 @@
               "description": "Deployment name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_listStatefulSets",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListStatefulSets",
         "displayName": "List StatefulSets",
         "modelDescription": "List StatefulSets in a namespace with desired/ready replicas, update strategy, and age. Use when the user asks about stateful workloads like databases, queues, or other StatefulSet-managed applications.",
@@ -264,12 +326,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listDaemonSets",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListDaemonSets",
         "displayName": "List DaemonSets",
         "modelDescription": "List DaemonSets in a namespace with desired/current/ready counts and node selector. Use when the user asks about per-node workloads like log collectors, monitoring agents, or CNI plugins.",
@@ -284,12 +351,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listJobs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListJobs",
         "displayName": "List Jobs",
         "modelDescription": "List Jobs in a namespace with completions, status (Running/Complete/Failed), duration, and age. Use when the user asks about batch workloads, CronJob runs, or one-off tasks.",
@@ -304,12 +376,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listServices",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListServices",
         "displayName": "List Kubernetes Services",
         "modelDescription": "List services in a namespace with type, cluster IP, ports, and selectors. Use when investigating networking, service discovery, or connectivity issues.",
@@ -324,12 +401,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listIngresses",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListIngresses",
         "displayName": "List Ingresses",
         "modelDescription": "List Ingresses in a namespace showing hosts, paths, backends, TLS configuration, and ingress class. Use when investigating external access, routing, or TLS configuration for services.",
@@ -344,12 +426,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_getEndpoints",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetEndpoints",
         "displayName": "Get Service Endpoints",
         "modelDescription": "Get the endpoints (backing pod IPs and ports) for a specific Kubernetes service. Use when investigating why a service has no endpoints, checking if pods are correctly selected, or debugging connectivity.",
@@ -368,12 +455,18 @@
               "description": "Service name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_listPVCs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListPVCs",
         "displayName": "List PersistentVolumeClaims",
         "modelDescription": "List PersistentVolumeClaims in a namespace showing status (Bound/Pending/Lost), capacity, storage class, access modes, and volume name. Use when investigating storage issues, pending PVCs, or checking storage allocation.",
@@ -388,12 +481,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listPVs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListPVs",
         "displayName": "List PersistentVolumes",
         "modelDescription": "List all PersistentVolumes in the cluster showing capacity, access modes, reclaim policy, status, storage class, and bound claim. Use when investigating cluster storage, unbound volumes, or storage capacity.",
@@ -407,7 +505,10 @@
       },
       {
         "name": "kube-doctor_getNodeMetrics",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetNodeMetrics",
         "displayName": "Get Node Metrics",
         "modelDescription": "Get real-time CPU and memory usage for all nodes from the Kubernetes metrics API. Shows current usage, capacity, and utilization percentage. Requires metrics-server to be installed. Use when checking node resource pressure or capacity planning.",
@@ -421,7 +522,10 @@
       },
       {
         "name": "kube-doctor_getPodMetrics",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetPodMetrics",
         "displayName": "Get Pod Metrics",
         "modelDescription": "Get real-time CPU and memory usage for pods in a namespace from the Kubernetes metrics API. Shows per-container resource consumption. Requires metrics-server. Use when checking which pods are consuming the most resources.",
@@ -436,12 +540,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_topResourceConsumers",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeTopResourceConsumers",
         "displayName": "Top Resource Consumers",
         "modelDescription": "Find the top CPU and memory consuming pods in a namespace or cluster-wide, sorted by usage. Requires metrics-server. Use when investigating resource pressure, noisy neighbors, or capacity issues.",
@@ -468,7 +577,10 @@
       },
       {
         "name": "kube-doctor_analyzeResourceAllocation",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeAnalyzeResourceAllocation",
         "displayName": "Analyze Resource Allocation",
         "modelDescription": "Analyze CPU and memory requests/limits allocation across pods in a namespace. Shows total requested vs allocatable, over-provisioned and under-provisioned pods, and generates a Mermaid chart. Use when investigating resource efficiency or capacity planning.",
@@ -483,12 +595,17 @@
               "description": "Kubernetes namespace"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listLimitRanges",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListLimitRanges",
         "displayName": "List LimitRanges",
         "modelDescription": "List LimitRanges in a namespace showing default requests/limits, min/max constraints per resource type (Container, Pod, PVC). Use when investigating why pods are getting default resource values or being rejected.",
@@ -503,12 +620,17 @@
               "description": "Kubernetes namespace"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_checkResourceQuotas",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeCheckResourceQuotas",
         "displayName": "Check Resource Quotas",
         "modelDescription": "Check ResourceQuota usage in a namespace. Shows used vs hard limits for each resource with usage percentages. Warns at 80% and critical at 90%. Use when investigating why resources cannot be created or checking quota headroom.",
@@ -523,12 +645,17 @@
               "description": "Kubernetes namespace. 'all' for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listCRDs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListCRDs",
         "displayName": "List Custom Resource Definitions",
         "modelDescription": "List all CRDs in the cluster with group, served versions, scope (Namespaced/Cluster), and age. Optionally filter by API group. Use when exploring what custom resources are installed (e.g., checking for Flux, Istio, cert-manager).",
@@ -547,7 +674,10 @@
       },
       {
         "name": "kube-doctor_getAPIResources",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetAPIResources",
         "displayName": "Get API Resources",
         "modelDescription": "List all API resources available in the cluster with their API group, whether they are namespaced, and supported verbs. Optionally filter by group. Use when exploring cluster capabilities or checking if specific APIs are available.",
@@ -566,7 +696,10 @@
       },
       {
         "name": "kube-doctor_listWebhookConfigs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListWebhookConfigs",
         "displayName": "List Webhook Configurations",
         "modelDescription": "List all MutatingWebhookConfigurations and ValidatingWebhookConfigurations with their endpoints, failure policies, timeouts, and matching rules. Warns about webhooks with failurePolicy=Fail. Use when debugging admission issues or slow API responses.",
@@ -580,7 +713,10 @@
       },
       {
         "name": "kube-doctor_diagnosePod",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeDiagnosePod",
         "displayName": "Diagnose Kubernetes Pod",
         "modelDescription": "Run comprehensive diagnostics on a specific pod. Checks container states, events, restart reasons, resource limits, node conditions, and fetches logs from failing containers. Use this as the PRIMARY tool when investigating a specific pod problem — it combines multiple checks into one call.",
@@ -599,12 +735,18 @@
               "description": "Pod name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_diagnoseNamespace",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeDiagnoseNamespace",
         "displayName": "Diagnose Kubernetes Namespace",
         "modelDescription": "Health check an entire namespace. Finds unhealthy pods, failing deployments, pending PVCs, warning events, high restart counts, and resource pressure. Use this as the PRIMARY tool when the user asks about the health of a namespace or wants a broad status check.",
@@ -619,12 +761,17 @@
               "description": "Kubernetes namespace"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_diagnoseCluster",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeDiagnoseCluster",
         "displayName": "Diagnose Kubernetes Cluster",
         "modelDescription": "Cluster-wide health check. Checks all node conditions, pod phase summary across all namespaces, warning events, kube-system health, and overall resource utilization. Use this when the user asks about cluster health, overall status, or wants a high-level view of problems.",
@@ -638,7 +785,10 @@
       },
       {
         "name": "kube-doctor_findUnhealthyPods",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeFindUnhealthyPods",
         "displayName": "Find Unhealthy Kubernetes Pods",
         "modelDescription": "Find all pods that are not healthy — CrashLoopBackOff, ImagePullBackOff, Pending, Error, OOMKilled, etc. Can filter by namespace or search cluster-wide. Use when the user asks about problems, errors, or wants to find what's broken.",
@@ -657,7 +807,10 @@
       },
       {
         "name": "kube-doctor_listNetworkPolicies",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListNetworkPolicies",
         "displayName": "List Kubernetes Network Policies",
         "modelDescription": "List network policies with pod selectors, ingress/egress rule counts, and policy details. Use when investigating network segmentation, traffic restrictions, or pod connectivity issues.",
@@ -672,12 +825,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listHPAs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListHPAs",
         "displayName": "List Horizontal Pod Autoscalers",
         "modelDescription": "List HPAs in a namespace showing target reference, min/max/current replicas, metric targets, and conditions. Use when investigating autoscaling behavior, replica counts, or scaling issues.",
@@ -692,12 +850,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listPDBs",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListPDBs",
         "displayName": "List Pod Disruption Budgets",
         "modelDescription": "List PodDisruptionBudgets in a namespace showing minAvailable, maxUnavailable, current/expected pods, and allowed disruptions. Warns when disruptions are blocked. Use when investigating drain failures or disruption protection.",
@@ -712,12 +875,17 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_analyzePodConnectivity",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeAnalyzePodConnectivity",
         "displayName": "Analyze Pod Network Connectivity",
         "modelDescription": "Analyze network connectivity for a specific pod by matching its labels against all network policies. Produces a Mermaid flowchart showing allowed and denied traffic. Use when debugging why a pod cannot reach another service or is unreachable.",
@@ -736,12 +904,18 @@
               "description": "Pod name to analyze"
             }
           },
-          "required": ["namespace", "podName"]
+          "required": [
+            "namespace",
+            "podName"
+          ]
         }
       },
       {
         "name": "kube-doctor_analyzePodSecurity",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeAnalyzePodSecurity",
         "displayName": "Analyze Pod Security Posture",
         "modelDescription": "Analyze security posture of a pod. Checks SecurityContext at pod and container level: root user, privilege escalation, capabilities, readOnlyRootFilesystem, hostNetwork/PID/IPC, seccomp profile. Returns severity-tagged findings and suggested hardening actions.",
@@ -760,12 +934,18 @@
               "description": "Pod name to analyze"
             }
           },
-          "required": ["namespace", "podName"]
+          "required": [
+            "namespace",
+            "podName"
+          ]
         }
       },
       {
         "name": "kube-doctor_listRBACBindings",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeListRBACBindings",
         "displayName": "List RBAC Bindings",
         "modelDescription": "List RoleBindings and ClusterRoleBindings for a namespace, showing binding name, scope, role reference, subject kind/name/namespace. Optionally filter by subject name. Use when auditing permissions or investigating access issues.",
@@ -784,12 +964,17 @@
               "description": "Optional filter by subject name (case-insensitive)"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_auditNamespaceSecurity",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeAuditNamespaceSecurity",
         "displayName": "Audit Namespace Security",
         "modelDescription": "Comprehensive security audit of a namespace. Checks network policies, PDBs, pod security contexts (privileged/root), RBAC bindings, and resource quotas. Produces a score (0-100), grade (A-F), findings, and a Mermaid policy coverage diagram. Use when assessing namespace security posture.",
@@ -804,12 +989,17 @@
               "description": "Kubernetes namespace"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_getWorkloadDependencies",
-        "tags": ["kubernetes", "kube-doctor"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor"
+        ],
         "toolReferenceName": "kubeGetWorkloadDependencies",
         "displayName": "Get Workload Dependencies",
         "modelDescription": "Map all dependencies for a Deployment, StatefulSet, or Pod: ConfigMaps, Secrets, PVCs, ServiceAccounts from volumes and env. Finds matching Services. Returns a Mermaid dependency graph. Use when understanding what a workload depends on or investigating missing configuration.",
@@ -832,12 +1022,19 @@
               "description": "Deployment, StatefulSet, or Pod (default: Deployment)"
             }
           },
-          "required": ["namespace", "workloadName"]
+          "required": [
+            "namespace",
+            "workloadName"
+          ]
         }
       },
       {
         "name": "kube-doctor_listFluxKustomizations",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeListFluxKustomizations",
         "displayName": "List Flux Kustomizations",
         "modelDescription": "List FluxCD Kustomizations in a namespace showing source reference, path, health status, last applied revision, and suspended state. Use when investigating Flux GitOps reconciliation status or checking what is deployed via Flux.",
@@ -852,12 +1049,18 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listFluxHelmReleases",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeListFluxHelmReleases",
         "displayName": "List Flux Helm Releases",
         "modelDescription": "List FluxCD HelmReleases in a namespace showing chart name, version, health status, remediation config, and suspended state. Use when checking Helm-based deployments managed by Flux.",
@@ -872,12 +1075,18 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listFluxSources",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeListFluxSources",
         "displayName": "List Flux Sources",
         "modelDescription": "List all FluxCD source objects: GitRepositories, OCIRepositories, HelmRepositories, HelmCharts, and Buckets. Shows type, URL, revision, and health status. Optionally filter by source type. Use when checking source sync status or debugging fetch failures.",
@@ -896,12 +1105,18 @@
               "description": "Filter by source type: git, oci, helm, helmchart, bucket (optional)"
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_listFluxImagePolicies",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeListFluxImagePolicies",
         "displayName": "List Flux Image Policies",
         "modelDescription": "List FluxCD ImageRepositories and ImagePolicies showing scanned images, latest tags, and policy rules. Use when investigating Flux image automation and auto-update configuration.",
@@ -916,12 +1131,18 @@
               "description": "Kubernetes namespace. Empty string for all namespaces."
             }
           },
-          "required": ["namespace"]
+          "required": [
+            "namespace"
+          ]
         }
       },
       {
         "name": "kube-doctor_diagnoseFluxKustomization",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeDiagnoseFluxKustomization",
         "displayName": "Diagnose Flux Kustomization",
         "modelDescription": "Deep diagnosis of a FluxCD Kustomization. Checks conditions, resolves source reference health, walks dependsOn chain, parses inventory, fetches events, and generates findings with suggested actions. Use when a Kustomization is failing or stalled.",
@@ -940,12 +1161,19 @@
               "description": "Kustomization name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_diagnoseFluxHelmRelease",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeDiagnoseFluxHelmRelease",
         "displayName": "Diagnose Flux Helm Release",
         "modelDescription": "Deep diagnosis of a FluxCD HelmRelease. Checks conditions, resolves chart and repository references, parses release history, reports remediation configuration, and fetches events. Use when a HelmRelease is failing or stuck.",
@@ -964,12 +1192,19 @@
               "description": "HelmRelease name"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       },
       {
         "name": "kube-doctor_diagnoseFluxSystem",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeDiagnoseFluxSystem",
         "displayName": "Diagnose Flux System",
         "modelDescription": "Comprehensive FluxCD system health check. Checks flux-system pods, Flux CRDs, tallies health across all Kustomizations/HelmReleases/Sources, lists warning events, and generates a Mermaid topology diagram. Use when checking overall Flux health or investigating system-wide issues.",
@@ -983,7 +1218,11 @@
       },
       {
         "name": "kube-doctor_getFluxResourceTree",
-        "tags": ["kubernetes", "kube-doctor", "fluxcd"],
+        "tags": [
+          "kubernetes",
+          "kube-doctor",
+          "fluxcd"
+        ],
         "toolReferenceName": "kubeGetFluxResourceTree",
         "displayName": "Get Flux Resource Tree",
         "modelDescription": "Trace the dependency tree of a FluxCD resource: source -> Kustomization/HelmRelease -> dependsOn chain -> managed resources from inventory. Generates a text tree and Mermaid dependency graph. Use when understanding deployment dependencies or tracing a Flux pipeline.",
@@ -1006,7 +1245,10 @@
               "description": "Kustomization or HelmRelease (default: Kustomization)"
             }
           },
-          "required": ["namespace", "name"]
+          "required": [
+            "namespace",
+            "name"
+          ]
         }
       }
     ]
