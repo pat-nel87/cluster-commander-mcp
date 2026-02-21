@@ -26,3 +26,8 @@ export function nodeRoles(node: k8s.V1Node): string {
     }
     return roles.length > 0 ? roles.join(',') : '<none>';
 }
+
+export async function getNode(name: string): Promise<k8s.V1Node> {
+    const api = getCoreApi();
+    return api.readNode({ name });
+}

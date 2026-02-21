@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
+	"github.com/pat-nel87/kube-doctor-mcp/pkg/flux"
 	"github.com/pat-nel87/kube-doctor-mcp/pkg/k8s"
 	"github.com/pat-nel87/kube-doctor-mcp/pkg/tools"
 )
@@ -29,8 +30,19 @@ func main() {
 		nil,
 	)
 
+	// Initialize the Flux client (optional — Flux CRDs may not be installed)
+	var fluxClient *flux.FluxClient
+	if client.Config != nil {
+		fc, err := flux.NewFluxClient(client.Config)
+		if err != nil {
+			log.Printf("FluxCD client not available: %v (Flux tools will be disabled)", err)
+		} else {
+			fluxClient = fc
+		}
+	}
+
 	// Register all tools
-	tools.RegisterAll(server, client)
+	tools.RegisterAll(server, client, fluxClient)
 
 	log.Println("kube-doctor MCP server starting on stdio...")
 

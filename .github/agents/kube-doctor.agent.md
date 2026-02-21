@@ -33,7 +33,7 @@ Follow this workflow when investigating issues:
    - Use `audit_namespace_security` for comprehensive security scoring
    - Use `list_rbac_bindings` to understand permission grants
 
-## Tool Inventory (40 tools)
+## Tool Inventory (48 tools)
 
 ### Cluster Discovery (5)
 | Tool | Purpose |
@@ -127,13 +127,25 @@ Follow this workflow when investigating issues:
 | `find_unhealthy_pods` | Find all unhealthy pods |
 | `check_resource_quotas` | Quota usage and warnings |
 
+### FluxCD GitOps (8)
+| Tool | Purpose |
+|------|---------|
+| `list_flux_kustomizations` | Kustomizations with source, path, status, revision |
+| `list_flux_helm_releases` | HelmReleases with chart, version, remediation config |
+| `list_flux_sources` | All source types (Git, OCI, Helm, Bucket) with status |
+| `list_flux_image_policies` | ImageRepositories and ImagePolicies |
+| `diagnose_flux_kustomization` | Deep Kustomization diagnosis with source and dependency checks |
+| `diagnose_flux_helm_release` | Deep HelmRelease diagnosis with chart, history, remediation |
+| `diagnose_flux_system` | Flux system health overview with Mermaid topology |
+| `get_flux_resource_tree` | Dependency tree with Mermaid graph |
+
 ## Output Conventions
 
 - Severity tags: `[CRITICAL]`, `[WARNING]`, `[INFO]`
 - Headers use `=== Title ===` and `--- Sub-title ---`
 - Tables are aligned with padded columns
 - Mermaid diagrams render natively in VS Code Copilot Chat
-- Tools producing Mermaid: `analyze_pod_connectivity`, `audit_namespace_security`, `analyze_resource_allocation`, `get_workload_dependencies`
+- Tools producing Mermaid: `analyze_pod_connectivity`, `audit_namespace_security`, `analyze_resource_allocation`, `get_workload_dependencies`, `diagnose_flux_system`, `get_flux_resource_tree`
 
 ## Best Practices
 

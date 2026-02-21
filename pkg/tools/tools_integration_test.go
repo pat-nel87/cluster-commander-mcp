@@ -23,7 +23,7 @@ func TestToolsLive(t *testing.T) {
 		Version: "test",
 	}, nil)
 
-	RegisterAll(server, client)
+	RegisterAll(server, client, nil)
 
 	ctx := context.Background()
 

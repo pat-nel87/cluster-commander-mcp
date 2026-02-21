@@ -6,7 +6,7 @@ Kubernetes cluster diagnostics for AI assistants. Two implementations, one goal:
 
 | Project | Path | Approach | Tools |
 |---------|------|----------|-------|
-| **Go MCP Server** | root (`main.go`) | Standalone binary, stdio transport (MCP protocol) | 40 |
+| **Go MCP Server** | root (`main.go`) | Standalone binary, stdio transport (MCP protocol) | 48 |
 | **VS Code Extension** | `kube-doctor-vscode/` | Native Language Model Tools API (no MCP dependency) | 15 |
 
 Both connect directly to the Kubernetes API via your kubeconfig. No kubectl dependency.
@@ -79,7 +79,7 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 }
 ```
 
-### All 40 Tools
+### All 48 Tools
 
 | Category | Tool | Description |
 |----------|------|-------------|
@@ -123,6 +123,14 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 | | `diagnose_cluster` | Cluster-wide health report |
 | | `find_unhealthy_pods` | Find all unhealthy pods |
 | | `check_resource_quotas` | Quota usage and warnings |
+| **FluxCD** | `list_flux_kustomizations` | Kustomizations with source, path, status, revision |
+| | `list_flux_helm_releases` | HelmReleases with chart, version, remediation |
+| | `list_flux_sources` | All source types (Git, OCI, Helm, Bucket) |
+| | `list_flux_image_policies` | ImageRepositories and ImagePolicies |
+| | `diagnose_flux_kustomization` | Deep Kustomization diagnosis |
+| | `diagnose_flux_helm_release` | Deep HelmRelease diagnosis |
+| | `diagnose_flux_system` | Flux system health with Mermaid topology |
+| | `get_flux_resource_tree` | Dependency tree with Mermaid graph |
 
 ### Testing
 
@@ -266,7 +274,8 @@ kube-doctor-mcp/
 ├── .github/agents/kube-doctor.agent.md    ← GitHub Copilot agent
 ├── pkg/
 │   ├── k8s/                               ← Kubernetes client wrappers
-│   ├── tools/                             ← MCP tool handlers (13 files)
+│   ├── flux/                              ← FluxCD client wrappers (controller-runtime)
+│   ├── tools/                             ← MCP tool handlers (14 files)
 │   └── util/                              ← Formatting, filters, error helpers
 ├── .vscode/mcp.json                       ← VS Code MCP config
 └── kube-doctor-vscode/                    ← VS Code extension (15 tools)

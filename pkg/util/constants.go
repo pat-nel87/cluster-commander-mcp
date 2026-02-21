@@ -32,4 +32,7 @@ const (
 
 	// MaxRBACBindings is the maximum number of RBAC bindings to return.
 	MaxRBACBindings = 200
+
+	// MaxFluxResources is the maximum number of Flux resources to return in a list.
+	MaxFluxResources = 200
 )

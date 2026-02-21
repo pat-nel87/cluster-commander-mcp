@@ -34,6 +34,26 @@ export function getPolicyApi(): k8s.PolicyV1Api {
     return getKubeConfig().makeApiClient(k8s.PolicyV1Api);
 }
 
+export function getBatchApi(): k8s.BatchV1Api {
+    return getKubeConfig().makeApiClient(k8s.BatchV1Api);
+}
+
+export function getAutoscalingApi(): k8s.AutoscalingV2Api {
+    return getKubeConfig().makeApiClient(k8s.AutoscalingV2Api);
+}
+
+export function getCustomObjectsApi(): k8s.CustomObjectsApi {
+    return getKubeConfig().makeApiClient(k8s.CustomObjectsApi);
+}
+
+export function getApiExtensionsApi(): k8s.ApiextensionsV1Api {
+    return getKubeConfig().makeApiClient(k8s.ApiextensionsV1Api);
+}
+
+export function getAdmissionApi(): k8s.AdmissionregistrationV1Api {
+    return getKubeConfig().makeApiClient(k8s.AdmissionregistrationV1Api);
+}
+
 /** Reset cached config (e.g. if user switches context). */
 export function resetClient(): void {
     _kubeConfig = undefined;
